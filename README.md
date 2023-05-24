@@ -4,7 +4,7 @@ This project was a collaborative effort to build a prototype for an addiction re
 
 Big thank you to all those who contributed to this!
 
-Georgia, Mike, Ben, Enyo. Thank you for all the work you put in developing this app, from user authentication, onboarding, chatbot integration, recovery tracker creation, and all the picky backend problems.
+Georgia, Mike, Ben, Enyo. Thank you for all the work you put in developing this app, from user authentication, onboarding, chatbot integration, recovery tracker creation, and all the picky backend problems. And thanks to the rest of the team for helpful discussions and advice on all aspects of the app.
 
 
 
