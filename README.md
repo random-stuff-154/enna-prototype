@@ -17,7 +17,7 @@ heroku login
 heroku git:remote -a enna-prototype
 
 
-```
+
 
 rails generating:
 rails new \
