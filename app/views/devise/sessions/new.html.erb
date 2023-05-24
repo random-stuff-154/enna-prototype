@@ -1,0 +1,87 @@
+<style>
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #EEF2E6;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .content-section {
+    margin-bottom: 2rem;
+  }
+
+  .auth-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .auth-links a, .auth-button {
+    display: block;
+    color: #EEF2E6;
+    text-decoration: none;
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    width: fit-content;
+    text-align: center;
+    border: 1px solid #EEF2E6;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .auth-links a:hover, .auth-button:hover {
+    background-color: #1F6744;
+    color: #EEF2E6;
+    text-decoration: none;
+  }
+
+  .auth-button {
+    margin: 0 auto;
+  }
+</style>
+
+<div class="centered-container">
+  <div class="content-section">
+    <h2>Log in</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "Log in", class: "auth-button" %>
+      </div>
+    <% end %>
+  </div>
+
+  New user?
+
+  <div class="content-section auth-links">
+    <%= link_to "Sign up", new_user_registration_path, class: "auth-links a" %>
+    <%= link_to "Forgot your password?", new_user_password_path, class: "auth-links a" %>
+  </div>
+</div>

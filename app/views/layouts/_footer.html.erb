@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<% if user_signed_in? %>
+  <footer>
+    <nav>
+      <ul class="icons">
+        <li><%= link_to '<i class="fas fa-comment-alt"></i>'.html_safe, chat_path((Chat.where(user_id: current_user)).first.id) %></li>
+        <li><%= link_to '<i class="fas fa-calendar-alt"></i>'.html_safe, '/abstinence_trackers' %></li>
+        <li><%= link_to '<i class="fas fa-sign-out-alt"></i>'.html_safe, destroy_user_session_path, method: :delete %></li>
+        <li><a href="mailto:team@enna-mind.com?subject=Prototype%20Feedback&amp;body=Page%20of%20app:%0A%20%20%20%20%5BPlease%20tell%20us%20which%20page,%20if%20applicable,%20the%20feedback%20concerns%20(e.g.,%20habit%20tracker%20page)%5D%0A%0ADescription:%0A%20%20%20%20%5BWhat%20particular%20aspect%20of%20the%20app%20(e.g.,%20the%20calendar)%5D%0A%0ALevel%20of%20concern:%0A%20%20%20%20%5BIs%20this%20critical,%20or%20just%20a%20bit%20annoying%20(or%20a%20bit%20nice)%5D" class="feedback-button">
+            <i class="fas fa-envelope"></i>
+            <span>Feedback</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </footer>
+<% end %>

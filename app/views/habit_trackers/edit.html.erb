@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Tracker</title>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #EEF2E6;
+      background: #032615;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .field input,
+    .field textarea {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      background-color: #EEF2E6;
+      border: 1px solid #999;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .field .celebration {
+      display: none;
+      font-size: 2rem;
+      animation: pop 0.3s;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .btn-group button {
+      display: inline-block;
+      background-color: #315338;
+      color: #032615;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+
+  .btn-group button.selected {
+    background-color: #2ecc71;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #2ecc71;
+  }
+
+
+    .btn-group button:hover {
+      background-color: #2ecc71;
+    }
+
+    .date-field {
+      text-align: center;
+    }
+
+    .date-field input {
+      text-align: center;
+    }
+    
+    #have-a-chat {
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+      width: 150px; /* Increase the width */
+      height: 150px; /* Increase the height */
+      line-height: 150px; /* Increase the line-height */
+      border-radius: 50%;
+      text-align: center;
+      background-color: #2ecc71;
+      color: #032615;
+      font-size: 1.25rem; /* Increase the font size */
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+    #have-a-chat:hover,
+    #have-a-chat.selected {
+      background-color: #315338; /* changed to a darker color */
+    }
+
+    #done-button {
+      display: inline-block;
+      background-color: #2ecc71;
+      color: #032615;
+      font-size: 1.25rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      text-decoration: none;
+      margin-bottom: 1rem;
+    }
+
+    #done-button:hover {
+      background-color: #27ae60;
+    }
+
+  </style>
+
+  <script>
+    function showCelebration() {
+      var celebration = document.getElementById("celebration");
+      celebration.style.display = "inline";
+      setTimeout(function () {
+        celebration.style.display = "none";
+      }, 1000);
+    }
+
+    function updateHabitState(habit_achieved) {
+      const isHabitAchieved = habit_achieved === true;
+      const isHabitMissed = habit_achieved === false;
+
+      document.getElementById("habit_tracker_habit_achieved").value = habit_achieved;
+      document.getElementById("habit-achieved-button").classList.toggle("selected", isHabitAchieved);
+      document.getElementById("habit-not-achieved-button").classList.toggle("selected", isHabitMissed);
+      document.getElementById("unknown-button").classList.toggle("selected", !isHabitAchieved && !isHabitMissed);
+
+      // Send an AJAX request to update the database
+      const habitTrackerId = <%= @habit_tracker.id %>;
+      const token = document.querySelector('meta[name="csrf-token"]').content;
+      const url = `/habit_trackers/${habitTrackerId}`;
+      const data = new FormData();
+      data.append("authenticity_token", token);
+      data.append("habit_tracker[habit_achieved]", habit_achieved === null ? '' : habit_achieved);
+
+      fetch(url, {
+        method: "PATCH",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRF-Token": token
+        },
+        body: data,
+        credentials: "same-origin"
+      })
+      .then(response => response.text())
+      .then(eval); // Execute the response as JavaScript code
+    }
+
+
+    function navigateToChat() {
+      const chatButton = document.getElementById("have-a-chat");
+      const habit_achieved = document.getElementById("habit_tracker_habit_achieved").value;
+      let message = "I don't want to share my experience today";
+
+      if (habit_achieved === "true") {
+        message = "I have achieved my habit  today - congratulate me";
+      } else if (habit_achieved === "false") {
+        message = "I missed my habit today - help me reflect on what I can do to achieve my goal next time";
+      }
+
+      const chatPath = chatButton.getAttribute("data-chat-path");
+      window.location.href = `${chatPath}?message=${encodeURIComponent(message)}`;
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      updateHabitState(null);
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Habit Tracker</h1>
+    <%= form_with(model: @habit_tracker, local: true) do |form| %>
+      <div class="field date-field">
+        <%= form.label :date %>
+        <%= form.text_field :date, value: @habit_tracker.date.strftime('%A %-d').concat(@habit_tracker.date.day.ordinalize[-2, 2]), disabled: true %>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" id="habit-achieved-button" onclick="updateHabitState(true); showCelebration();">Achieved</button>
+        <button type="button" id="habit-not-achieved-button" onclick="updateHabitState(false);">Not Achieved</button>
+        <button type="button" id="unknown-button" onclick="updateHabitState(null);">N/A</button>
+      </div>
+
+      <div class="field" style="display: none;">
+        <%= form.label :habit_achieved %>
+        <%= form.hidden_field :habit_achieved %>
+        <span class="celebration" id="celebration">🎉</span>
+      </div>
+
+      <button id="have-a-chat" type="button" data-chat-path="<%= chat_path(Chat.where(user_id: current_user).first.id) %>" onclick="navigateToChat()">Have a chat</button>
+
+      <div style="margin: 1rem 1rem;">
+      Click here to chat with enna about your experience today.
+      </div>
+
+      <a id="done-button" class="btn-group button" href="<%= habit_trackers_path %>">Done</a>
+
+    <% end %>
+  </div>
+</body>
+</html>

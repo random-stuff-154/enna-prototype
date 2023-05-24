@@ -1,0 +1,325 @@
+<style>
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #EEF2E6;
+    background-color: #032615;
+    height: 100vh;
+    margin: 0;
+  }
+
+ .info-button {
+  background-color: #EEF2E6; /* this is the hex value for beige */
+  color: #032615; /* this is the hex value for dark green */
+  border-radius: 50%;
+  padding: 2px 5px; /* reduce padding to make button smaller */
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  top: 10px;
+  right: 10px;
+}
+
+.info-bubble {
+  position: relative;
+  max-width: 200px;
+  background-color: #EEF2E6; /* same color as the header text */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 10px;
+  color: #032615; /* this is the hex value for dark green */
+}
+
+
+    .info-bubble p {
+      margin-bottom: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+  .separator {
+    border-top: 2px solid #EEF2E6;
+    width: 100%;
+    margin: 2rem 0;
+  }
+
+  .message-input {
+    flex-grow: 1;
+    margin-right: 1rem;
+  }
+
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    flex-direction: row;
+  }
+
+  .send-button-container,
+  .delete-button-container {
+    margin-right: 0.5rem;
+  }
+
+  .container.chat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  .messages {
+    max-height: 70vh;
+    overflow-y: scroll;
+    width: 100%;
+    padding: 0 0.25rem;
+  }
+
+  .user-message,
+  .bot-message {
+    background-color: #fff;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    width: fit-content;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+  }
+
+  .bot-message {
+    background-color: #EEF2E6;
+  }
+
+  .user-message p,
+  .bot-message p {
+    margin: 0;
+  }
+
+  .messages small {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: #6C7A89;
+  }
+
+  .d-flex.mb-3 {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  .flex-grow-1.mr-3 {
+    flex-grow: 1;
+    margin-right: 1rem;
+  }
+
+  .btn.btn-primary,
+  .btn-danger {
+    background-color: #EEF2E6;
+    border: 1px solid #EEF2E6;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    color: #032615;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px;
+  }
+
+  .btn.btn-primary:hover,
+  .btn-danger:hover {
+    background-color: #032615;
+    color: #EEF2E6;
+  }
+
+  .btn-secondary {
+    background-color: #6c7a89;
+    border: 1px solid #6c7a89;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    color: #032615;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px;
+  }
+
+  .btn-secondary:hover {
+    background-color: #032615;
+    color: #EEF2E6;
+  }
+
+  form.destroy-chat-messages-form {
+    display: inline-block;
+  }
+
+  .container.chat {
+    justify-content: flex-start;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    padding-top: 2rem;
+  }
+
+  input[type="text"],
+  .message-input {
+    background-color: #EEF2E6;
+    color: #032615; /* dark green */
+    border-radius: 5px;
+    border: 1px solid #032615;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 150px;
+    height: 100%;
+    max-height: 70px;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  .input-buttons-wrapper {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .message-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .message-input {
+    flex-grow: 1;
+    margin-right: 1rem;
+  }
+
+  .header {
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .title {
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
+    .buttons-container {
+      display: flex;
+      align-items: center;
+      margin-top: 0;
+      flex-direction: row;
+    }
+
+    .send-button-container,
+    .delete-button-container {
+      margin: 0.2rem;
+      margin-top: 0.2rem;
+    }
+  }
+</style>
+<% if current_user == @chat.user %>
+  <div class="container chat">
+    <div class="header">
+      <div class="title" style="flex-direction: column">
+        <h1>
+        Chat to enna 
+        <button class="info-button" onclick="toggleInfo()" style="position: relative">i</button>
+        </h1>
+      </div>
+
+
+      <div id="info" class="info-bubble hidden">
+        <button class="close-button" onclick="toggleInfo()">x</button>
+        <p>Chat to enna about your progress. enna will help you think about how you are feeling but will not provide you with explicit advice.</p>
+      </div>
+    </div>
+    <div class="input-buttons-wrapper d-flex justify-content-start">
+      <%= simple_form_for [@chat, @message], html: { class: "message-form flex-grow-1 mr-3" } do |f| %>
+        <%= f.input :content, label: false, as: :text, placeholder: "Message Enna", input_html: { onkeydown: 'if (event.keyCode == 13) { this.form.submit(); return false; }', style: 'max-width: 100%; margin-right: 10px;' } %>
+        <%= f.submit "Send", class: "btn btn-primary", id: "send-button" %>
+      <% end %>
+      <div class="delete-button-container">
+        <%= form_for @chat, url: destroy_chat_messages_path(@chat), method: :delete do |f| %>
+          <%= f.submit 'Delete', class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="messages">
+      <% @chat.messages.order(created_at: :desc).each do |message| %>
+        <% if message.content != "I just abstained today - congratulate me" && message.content != "I gave in to my addiction today - help me reflect on what I can do to prevent this next time" %>
+          <div id="message-<%= message.id %>" class="<%= message.prompt_or_response ? 'user-message' : 'bot-message' %>">
+            <small>
+              <% if message.prompt_or_response == true %>
+                <p><strong> you </strong></p>
+              <% else %>
+                <p><strong> enna </strong></p>
+              <% end %>
+            </small>
+            <hr class="solid-divider">
+            <p><%= message.content %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="separator" style="border-bottom: none;"></div>
+  </div>
+
+<% else %>
+  <h1>You do not have access to this page</h1>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const messageForm = document.querySelector(".message-form");
+    const sendButton = document.getElementById("send-button");
+
+    messageForm.addEventListener("submit", function() {
+      sendButton.disabled = true;
+      sendButton.classList.remove("btn-primary");
+      sendButton.classList.add("btn-secondary");
+    });
+  });
+
+  function toggleInfo() {
+    var infoBubble = document.getElementById("info");
+    infoBubble.classList.toggle("hidden");
+  }
+</script>

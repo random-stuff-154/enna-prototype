@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="test-app-logo.svg"
+   inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.7245343"
+     inkscape:cx="-10.727534"
+     inkscape:cy="27.253735"
+     inkscape:window-width="1309"
+     inkscape:window-height="456"
+     inkscape:window-x="210"
+     inkscape:window-y="176"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg6" />
+  <rect
+     width="100%"
+     height="100%"
+     fill="#032615"
+     id="rect2" />
+  <text
+     x="34.010788"
+     y="14.644068"
+     dy="17.5"
+     font-family="'Palatino Linotype', Palatino, serif"
+     font-size="50px"
+     fill="#eef2e6"
+     text-anchor="middle"
+     dominant-baseline="middle"
+     id="text4">e</text>
+</svg>

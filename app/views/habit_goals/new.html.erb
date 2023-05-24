@@ -1,0 +1,102 @@
+<style>
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #EEF2E6;
+    background-color: #032615;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container.habit-goal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center; /* Add this line */
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  form {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .submit-button {
+    background-color: #EEF2E6;
+    border: 1px solid #EEF2E6;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    color: #032615;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .submit-button:hover {
+    background-color: #032615;
+    color: #EEF2E6;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  select {
+    background-color: #EEF2E6;
+    border-radius: 5px;
+    border: 1px solid #032615;
+    padding: 0.5rem;
+    color: #032615;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  .separator {
+  border-top: 2px solid #EEF2E6;
+  width: 100%;
+  margin: 2rem 0;
+  }
+</style>
+
+<div class="container habit-goal" style="margin-top: 50px;">
+  <h1>Habit goal</h1>
+
+  <div style="margin: 0 0.5rem;">
+  With the time you save not watching porn, enna asks you to invest in building a new habit. This can be anything from running, to meditation, to not going on your phone before bed.
+
+  You set the goal - enna will help you get there.
+  </div>
+
+  <div class="separator"></div>
+
+  <% if current_user.habit_goal.present? %>
+    <p>Overwrite your current goal</p>
+    <%= simple_form_for @habit_goal do |f| %>
+      <%= f.input :input_text, label: "What habit would you like to start?"%>
+      <%= f.input :length, label: "Number of days: ", collection: ["20", "25", "30"]%>
+      <%= f.input :threshold, label: "Threshold percentage: ", collection: ["20", "33", "50", "100"]%>
+      <%= f.submit value="Confirm goal", class: "submit-button" %>
+    <% end %>
+  <% else %>
+    <%= simple_form_for @habit_goal do |f| %>
+      <%= f.input :input_text, label: "What habit would you like to start?"%>
+      <%= f.input :length, label: "Number of days: ", collection: ["20", "25", "30"]%>
+      <%= f.input :threshold, label: "Threshold percentage: ", collection: ["20", "33", "50", "100"]%>
+      
+      <div style="margin: 0.5rem 0.5rem;">
+      With a longer term goal, it is important to give space for the unexpected events of life. Your threshold will allow you to miss a proportion of days without failing your overall goal. 100 means never miss a day, 50 means every other day. 
+      </div>
+
+      <%= f.submit value="Confirm goal", class: "submit-button", style: "margin-top: 10px;" %>
+    <% end %>
+  <% end %>
+  <div style="height: 25px; border-bottom: 10px solid beige;"></div>
+  <div class="separator" style="border-bottom: none;"></div>
+</div>

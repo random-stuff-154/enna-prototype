@@ -1,0 +1,2 @@
+module AbstinenceTrackersHelper
+end

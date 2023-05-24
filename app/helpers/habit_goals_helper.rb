@@ -1,0 +1,2 @@
+module HabitGoalsHelper
+end

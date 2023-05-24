@@ -1,0 +1,91 @@
+<style>
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #EEF2E6;
+    background-color: #032615;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container.user-questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center; /* Add this line */
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .separator {
+  border-top: 2px solid #EEF2E6;
+  width: 100%;
+  margin: 2rem 0;
+  }
+
+  form {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .submit-button {
+    background-color: #EEF2E6;
+    border: 1px solid #EEF2E6;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    color: #032615;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .submit-button:hover {
+    background-color: #032615;
+    color: #EEF2E6;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  select {
+    background-color: #EEF2E6;
+    border-radius: 5px;
+    border: 1px solid #032615;
+    padding: 0.5rem;
+    color: #032615;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+</style>
+
+<div class="container user-questions">
+  <h1>Onboarding questions</h1>
+
+  <div style="margin: 0 0.5rem;">
+  These questions will allow enna to personalise your experience, ensuring it is as useful as possible for your situation. If you are not comfortable sharing this information, press “Get started” to skip.
+  </div>
+
+  <div class="separator"></div>
+
+  <%= simple_form_for @user, url: user_path(@user), method: :patch do |f| %>
+    <%= f.submit value="Skip", class: "submit-button" %>
+    <%= f.input :question_1_answer, label: "Do you feel positive about your sexuality?", collection: ["Yes", "Kinda", "No", "Prefer not to say"], input_html: { class: 'custom-select' } %>
+    <%= f.input :question_2_answer, label: "How often do you watch porn?", collection: ["Daily", "A few times a week", "Now and then", "Never", "Prefer not to say"], input_html: { class: 'custom-select' } %>
+    <%= f.input :question_3_answer, label: "Are you addicted to porn?", collection: ["Yes", "Kinda", "No", "Not sure", "Prefer not to say"], input_html: { class: 'custom-select' } %>
+    <%= f.submit value="Get started", class: "submit-button" %>
+  <% end %>
+</div>

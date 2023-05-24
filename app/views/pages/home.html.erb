@@ -1,0 +1,37 @@
+<style>
+  body {
+    font-family: 'Palatino Linotype', 'Palatino', serif;
+    color: #EEF2E6;
+  }
+  .btn {
+    color: inherit;
+    border: 1px solid #EEF2E6;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 5px 10px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+  }
+  .btn:hover {
+    background-color: #EEF2E6;
+    color: black;
+  }
+  .text-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+</style>
+<div class="container">
+  <div class="text-center">
+    <h1 class="main-title" >- enna -</h1>
+    <h2 class="user-email"><%= current_user.email if user_signed_in? %></h2>
+    <div class="links">
+      <%= link_to "Sign up", new_user_registration_path, class: "btn btn-logout" %>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-login" %>
+    </div>
+  </div>
+</div>

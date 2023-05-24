@@ -1,0 +1,84 @@
+@import "bootstrap";
+
+body {
+  background-image: linear-gradient(to left, rgba(3, 38, 21, 1), rgba(31, 103, 68, 1));
+}
+
+.chat .title-and-delete {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat h1 {
+  color: white;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow-y: scroll;
+}
+
+.user-message,
+.bot-message {
+  // display: flex;
+  // flex-direction: column;
+  margin-bottom: 1rem;
+  max-width: 75%;
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #EEF2E6; /* set background color to EEF2E6 */
+  border-radius: 10px 0px 10px 10px;
+  padding: 10px;
+  font-family: "Source Sans Pro", sans-serif; /* set font family to Source Sans Pro */
+  color: black; /* set text color to black */
+}
+
+.bot-message {
+  align-self: flex-start;
+  background-color: #EEF2E6; /* set background color to EEF2E6 */
+  border-radius: 0px 10px 10px 10px;
+  padding: 10px;
+  font-family: "Source Sans Pro", sans-serif; /* set font family to Source Sans Pro */
+  color: black; /* set text color to black */
+}
+
+.user-message small p,
+.bot-message small p {
+  margin-bottom: 0;
+}
+
+hr.solid-divider {
+  border-top: 2px solid #bbb;
+  margin: 4px 0;
+}
+
+
+.user-message small,
+.bot-message small {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+  @media (min-width: 768px) {
+    .container.chat {
+      max-width: 80%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .container.chat {
+      max-width: 60%;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .container.chat {
+      max-width: 50%;
+    }
+  }

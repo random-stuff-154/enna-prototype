@@ -1,0 +1,85 @@
+<style>
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #EEF2E6;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .content-section {
+    margin-bottom: 2rem;
+  }
+
+  .auth-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .auth-links a, .auth-button {
+    display: block;
+    color: #EEF2E6;
+    text-decoration: none;
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    width: fit-content;
+    text-align: center;
+    border: 1px solid #EEF2E6;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .auth-links a:hover, .auth-button:hover {
+    background-color: #1F6744;
+    color: #EEF2E6;
+    text-decoration: none;
+  }
+
+  .auth-button {
+    margin: 0 auto;
+  }
+</style>
+
+<div class="centered-container">
+  <div class="content-section">
+    <h2>Change your password</h2>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="field">
+        <%= f.label :password, "New password" %><br />
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+        <% end %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field" style="padding-bottom: 1rem;">
+        <%= f.label :password_confirmation, "Confirm new password" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Change my password", class: "auth-button" %>
+      </div>
+    <% end %>
+  </div>
+
+  Want to go back?
+  <div class="content-section auth-links">
+    <%= link_to "Log in", new_user_session_path, class: "auth-links a" %>
+    <%= link_to "Forgot your password?", new_user_password_path, class: "auth-links a" %>
+  </div>
+</div>

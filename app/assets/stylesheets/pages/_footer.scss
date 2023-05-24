@@ -1,0 +1,56 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #1F6744;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #1F6744;
+}
+
+.icons{
+  list-style: none;
+  text-decoration: none;
+}
+
+ul.icons {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.icons li {
+  margin: 0 10px;
+}
+
+ul.icons li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+}
+
+li {
+  margin: 0;
+}
+
+@media screen and (max-width: 480px) {
+  ul.icons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  li {
+    margin: 0.5rem;
+  }
+}
