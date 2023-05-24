@@ -11,37 +11,6 @@ Georgia, Mike, Ben, Enyo. Thank you for all the work you put in developing this 
 
 # ennaMVP-rubyrails
 
-macbook setup 
-```
-mkdir my-apps
-cd my-apps
-git clone https://github.com/random-stuff-154/ennaMVP-rubyrails.git
-sudo gem install rails
-\curl -sSL https://get.rvm.io | bash -s stable
-	(Close and reopen terminal)
-rvm install ruby
-rvm install 3.1.3
-rvm use 3.1.3
-cd my-apps/ennaMVP-rubyrails
-brew install icu4c
-brew install postgresql
-brew info postgresql
-	(to check it worked)
-which pg_config
-	(to check postgresql installation worked, if not try reinstalling after next step)
-nano ~/.zshrc and add 
-	export PATH="/usr/local/opt/postgresql/bin:$PATH"
-bundle install
-initdb /usr/local/var/postgres
-pg_ctl -D /usr/local/var/postgres -l logfile start
-mkdir /opt/homebrew/var/postgres/pg_log
-nano /opt/homebrew/var/postgres/postgresql.conf
-	(search for port and change to 5433)
-brew services restart postgresql
-rails db:create
-rails db:migrate
-rails s 
-
 	(now to deploy the app)
 brew tap heroku/brew && brew install heroku
 heroku login
