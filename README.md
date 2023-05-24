@@ -1,3 +1,14 @@
+# Contributers
+
+This project was a collaborative effort to build a prototype for an addiction recovery app- enna. 
+
+Big thank you to all those who contributed to this!
+
+Georgia, Mike, Ben, Enyo. Thank you for all the work you put in developing this app, from user authentication, onboarding, chatbot integration, recovery tracker creation, and all the picky backend problems.
+
+
+
+
 # ennaMVP-rubyrails
 
 macbook setup 
